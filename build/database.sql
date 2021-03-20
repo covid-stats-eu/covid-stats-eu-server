@@ -11,8 +11,8 @@ USE covid_status_eu;
 CREATE TABLE country(
   -- Values
   code VARCHAR(4) NOT NULL,
-  name VARCHAR(30) NOT NULL,
-  population NVARCHAR(255) DEFAULT 'unspecified',
+  name VARCHAR(40) NOT NULL,
+  population INT DEFAULT NULL,
 
   -- Keys
   PRIMARY KEY (code)
