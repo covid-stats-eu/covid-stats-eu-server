@@ -1,0 +1,27 @@
+{
+  "name": "covid-stats-eu",
+  "version": "1.0.0",
+  "description": "Covid activity tracker for EU countries",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dimpram/covid-stats-eu.git"
+  },
+  "keywords": [
+    "covid"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dimpram/covid-stats-eu/issues"
+  },
+  "homepage": "https://github.com/dimpram/covid-stats-eu#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql2": "^2.2.5"
+  }
+}
