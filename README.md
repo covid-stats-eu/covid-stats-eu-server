@@ -8,11 +8,13 @@ A web app that displays EU covid data in a pretty and practical way
 
 Covid Stats EU is a simple data analytics system for covid activity monitoring and it's part of a collaborative university assignment in Web technologies course. 
 
-![Covid Stats EU - ERD](https://user-images.githubusercontent.com/44473195/111786333-5b347a00-88c6-11eb-90ad-b951eca62707.png)
+![Covid stats ERD](https://user-images.githubusercontent.com/44473195/111866605-5976bf00-8977-11eb-9b50-0dd572c76ca1.png)
+
 
 *Covid Stats EU entity relationship diagram - made with [lucid](https://lucid.app)*
 
-<img src="https://user-images.githubusercontent.com/44473195/111786801-de55d000-88c6-11eb-8b7d-c20dd68b9bfd.png" width="700" alt="Covid Stats EU - Database schema"/>
+<img src="https://user-images.githubusercontent.com/44473195/111866621-7b704180-8977-11eb-92d1-470f929cedf3.png" width="700" alt="Covid Stats EU - Database schema"/>
+
 
 *Covid Stats EU database schema - made with [lucid](https://lucid.app)*
 
@@ -20,6 +22,8 @@ Covid Stats EU is a simple data analytics system for covid activity monitoring a
 ## Installation for development
 
 *In the future there will be a docker version*
+
+Make sure you have nodejs v15 and up and mariadb installed on your machine
 
 Clone the repository 
 
