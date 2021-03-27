@@ -1,14 +1,12 @@
 // Database connection and configuration
-const mysql = require('mysql2/promise');
-const credentials = require('./credentials.js');
+import { createConnection } from 'mysql2/promise';
+import credentials from './credentials.js';
 
-async function query(sql, params) {
-    const connection = await mysql.createConnection(credentials.db);
+const query = async (sql, params) => {
+    const connection = await createConnection(credentials.db);
     const [results, ] = await connection.execute(sql, params);
 
     return results;
 }
 
-module.exports = {
-    query
-}
+export default query
