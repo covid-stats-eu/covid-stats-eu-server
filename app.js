@@ -1,6 +1,6 @@
 import express, { json } from 'express'
-import activityRouter from './routes.js'
-
+import {activityRouter, countryRouter } from './routes.js'
+ 
 const app = express()
 const port = process.env.PORT || 3000   // Use system's enviroment port number else use 3000
 
@@ -9,6 +9,7 @@ app.use(json())
 
 // using routes
 app.use('/activity', activityRouter)
+app.use('/country', countryRouter)
 
 // Root request
 app.get("/", (req, res) => {
