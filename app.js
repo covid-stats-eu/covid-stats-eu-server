@@ -1,4 +1,5 @@
 import express, { json } from 'express'
+import cors from 'cors'
 import activityRouter from './routes.js'
 
 const app = express()
@@ -6,6 +7,7 @@ const port = process.env.PORT || 3000   // Use system's enviroment port number e
 
 // Middleware for parsing json
 app.use(json())
+app.use(cors())
 
 // using routes
 app.use('/activity', activityRouter)
