@@ -5,7 +5,13 @@ const getAll = async () => {
 }
 
 const getByCountry = async (countryCode) => {
-    return await query('SELECT sum(cases), sum(deaths), sum(tests) FROM activity WHERE code="' + countryCode + '";')
+    const result = await query('SELECT sum(cases) as cases, sum(deaths) as deaths, sum(tests) as tests FROM activity WHERE `code`= ?', [countryCode])
+
+    if (result[0]['cases'] != null && result[0]['deaths'] != null && result[0]['tests'] != null) {
+        return result
+    } else {
+        return "This country doesnt exist"
+    }
 }
 
 export {
