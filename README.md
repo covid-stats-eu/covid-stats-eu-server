@@ -36,6 +36,21 @@ Cd into the cloned repository
 cd covid-status-eu
 ```
 
+Create `config/credentials.js' and add your mariadb credentials like this:
+
+```js
+const credentials = {
+    db: {
+      host: 'your host',
+      user: 'your username',
+      password: 'your password',
+      database: 'your database',
+    },
+  };
+  
+  module.exports = credentials;
+```
+
 Start node
 
 ```bash
