@@ -44,9 +44,21 @@ const getDeathsAndCasesByDate = async (res, countryCode, startDate, endDate) => 
     return result;
 }
 
+
+const getNumberOfTopTenWeek = async () => {
+    return await query( 
+        'SELECT DISTINCT ACTIVITY.code, count(*) over ( partition BY ACTIVITY.code ) FROM activity ACTIVITY ' + // DISTINCT
+        'LEFT JOIN activity ACTIVITY_B ON ' + 
+        'ACTIVITY.year_week = ACTIVITY_B.year_week and ACTIVITY.cases <= ACTIVITY_B.cases ' +
+        'GROUP BY ACTIVITY.code, ACTIVITY.year_week, ACTIVITY.cases ' +
+        'having count(*) <= 10 ORDER BY ACTIVITY.year_week ASC, ACTIVITY.cases'
+    );
+}
+
 export {
     getAll,
     getAllByCountry,
     getDeathsAndCasesByDate,
+    getNumberOfTopTenWeek,
 };
 

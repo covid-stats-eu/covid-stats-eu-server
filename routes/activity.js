@@ -42,5 +42,9 @@ router.get('/getDeathsAndCasesByDate', async (req, res) => {
     res.json(await activity.getDeathsAndCasesByDate(res, country, startDate, endDate));
 })
 
+router.get('/getNumberOfTopTenWeek', async (req, res) => {
+    res.json(await activity.getNumberOfTopTenWeek());
+})
+
 
 export default router
