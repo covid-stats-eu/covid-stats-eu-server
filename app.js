@@ -11,8 +11,8 @@ app.use(json())
 app.use(cors())
 
 // using routes
-app.use('/activity', activityRouter)
-app.use('/country', countryRouter)
+app.use('/activity', cors(), activityRouter)
+app.use('/country', cors(), countryRouter)
 
 // Root request
 app.get("/", (req, res) => {
