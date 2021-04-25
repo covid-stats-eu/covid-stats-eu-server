@@ -57,7 +57,7 @@ const getNumberOfTopTenWeek = async () => {
 
 export {
     getAll,
-    getAllByCountry,
+    getAllByCountry, 
     getDeathsAndCasesByDate,
     getNumberOfTopTenWeek,
 };
