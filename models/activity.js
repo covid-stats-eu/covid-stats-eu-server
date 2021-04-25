@@ -47,7 +47,7 @@ const getDeathsAndCasesByDate = async (res, countryCode, startDate, endDate) => 
 
 const getNumberOfTopTenWeek = async () => {
     return await query( 
-        'SELECT DISTINCT ACTIVITY.code, count(*) over ( partition BY ACTIVITY.code ) FROM activity ACTIVITY ' + // DISTINCT
+        'SELECT DISTINCT ACTIVITY.code, count(*) over ( partition BY ACTIVITY.code ) as numberOfWeeks FROM activity ACTIVITY ' + // DISTINCT
         'LEFT JOIN activity ACTIVITY_B ON ' + 
         'ACTIVITY.year_week = ACTIVITY_B.year_week and ACTIVITY.cases <= ACTIVITY_B.cases ' +
         'GROUP BY ACTIVITY.code, ACTIVITY.year_week, ACTIVITY.cases ' +
