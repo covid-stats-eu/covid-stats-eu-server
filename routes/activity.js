@@ -10,7 +10,7 @@ router.get('/getAll', async (req, res) => {
 
 router.get('/getAllByCountry', async (req, res) => {
     const country = req.query.country
-    res.json(await activity.getByCountry(country))
+    res.json(await activity.getAllByCountry(country))
 })
 
 router.get('/getDeathsAndCasesByDate', async (req, res) => {
