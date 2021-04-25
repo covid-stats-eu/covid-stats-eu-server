@@ -28,4 +28,8 @@ router.get('/getByCases', async (req, res) => {
     res.json(await country.getByCases(res, cases, startDate, endDate))
 })
 
+router.get('/getTop10Weeks', async (req, res) => {
+    res.json(await country.getTop10Weeks())
+})
+
 export default router

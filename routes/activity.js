@@ -5,10 +5,6 @@ import schema from '../schema.js'
 
 const router = Router()
 
-router.get('/getAll', async (req, res) => {
-    res.json(await activity.getAll())
-})
-
 router.get('/getAllByCountry', async (req, res) => {
     const country = req.query.country
     // validate user's input
