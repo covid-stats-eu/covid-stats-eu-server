@@ -8,7 +8,16 @@ const getByCases = async (cases, startDate, endDate) => {
     )
 }
 
+const getTop10Weeks = async () => {
+    return await query("SELECT activity.code, activity.year_week, max((activity.tests/country.population)*100) AS percent \
+                        FROM activity \
+                        INNER JOIN country ON activity.code=country.code \
+                        GROUP BY activity.code \
+                        ORDER BY percent DESC \
+                        LIMIT 10;")
+}
+
 export {
     getByCases,
+    getTop10Weeks,
 }
-    
