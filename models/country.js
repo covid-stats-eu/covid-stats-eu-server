@@ -1,5 +1,6 @@
 import query from "../config/db.js"
 
+// QC
 const getByCases = async (res, cases, startDate, endDate) => {
     const result = await query('SELECT COUNTRY.* \
                         FROM country COUNTRY \
@@ -18,6 +19,7 @@ const getByCases = async (res, cases, startDate, endDate) => {
     return result
 }
 
+// QD
 const getTop10Weeks = async () => {
     return await query('SELECT activity.code, activity.year_week, max((activity.tests/country.population)*100) AS percent \
                         FROM activity \

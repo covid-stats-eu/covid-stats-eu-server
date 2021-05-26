@@ -5,6 +5,7 @@ const getAll = async () => {
     return await query('SELECT cases, deaths, tests FROM activity')
 }
 
+// QA
 const getAllByCountry = async (res, countryCode) => {
     const result = await query('SELECT sum(cases) as cases, sum(deaths) as deaths, sum(tests) as tests \
                                 FROM activity \
@@ -26,6 +27,7 @@ const getAllByCountry = async (res, countryCode) => {
     
 }
 
+// QB
 const getDeathsAndCasesByDate = async (res, countryCode, startDate, endDate) => {
     const result = await query('SELECT sum(cases) as cases, sum(deaths) as deaths\
                                 FROM activity \
@@ -44,7 +46,7 @@ const getDeathsAndCasesByDate = async (res, countryCode, startDate, endDate) => 
     return result;
 }
 
-
+// QE
 const getNumberOfTopTenWeek = async () => {
     return await query('SELECT DISTINCT ACTIVITY.code, count(*) over ( partition BY ACTIVITY.code ) as numberOfWeeks \
                         FROM activity ACTIVITY \
