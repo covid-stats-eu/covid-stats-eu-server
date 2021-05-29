@@ -74,11 +74,31 @@ const getCountryPairs = async (startDate, endDate) => {
     );
 }
 
+// QG
+const addData = async (res, cases, deaths, tests, year_week, code) => {
+    let result;
+    try {
+        result = await query(        
+            'INSERT INTO activity (cases, deaths, tests, year_week, code)\
+            VALUES (?, ?, ?, ?, ?);', [cases, deaths, tests, year_week, code]
+            );
+    } catch (e) {
+        // handle some some sql error
+        if (e.code == 'ER_DUP_ENTRY') {
+            return "There is already data for Country " + code + " at week " + year_week;
+        } else {
+            throw(e)
+        }
+    }
+    return "Database Updated Successfully";
+}
+
 export {
     getAll,
     getAllByCountry, 
     getDeathsAndCasesByDate,
     getNumberOfTopTenWeek,
     getCountryPairs,
+    addData,
 };
 

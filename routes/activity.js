@@ -70,5 +70,45 @@ router.get('/getCountryPairs', async (req, res) => {
 
 })
 
+router.post('/addData', async (req, res) => {
+    const country = req.body.country
+    let date_of_week = req.body.date
+    const cases = req.body.cases
+    const deaths = req.body.deaths
+    const tests = req.body.tests
+    // validate user's input
+    try {
+        if (isNaN(cases)) {
+            throw new Error(`"cases" is required`)
+        }
+        if (isNaN(deaths)) {
+            throw new Error(`"deaths" is required`)
+        }
+        if (isNaN(tests)) {
+            throw new Error(`"tests" is required`)
+        }
+        if (!date_of_week) {
+            throw new Error(`"date" is required`)
+        }
+        if (!country) {
+            throw new Error(`"country" is required`)
+        }
+        const value = await schema.validateAsync({ 
+            country: country,
+            startDate: date_of_week,
+            cases: cases,
+            deaths, deaths,
+            tests: tests
+        });
+    } catch (err) { 
+        res.status(400).send(err.message);
+        return;
+    }
+    // convert dates to year-week number 
+    const number_of_week = getWeekNumber(date_of_week);
+
+    res.json(await activity.addData(res, cases, deaths, tests, number_of_week, country));
+})
+
 
 export default router
