@@ -57,10 +57,28 @@ const getNumberOfTopTenWeek = async () => {
                         ORDER BY ACTIVITY.year_week ASC, ACTIVITY.cases');
 }
 
+// QF
+const getCountryPairs = async (startDate, endDate) => {
+    return await query(        
+        'select ' +
+        'tb_1.code as A_code, tb_1.cases as A_cases, tb_1.deaths as A_deaths, ' + 
+        'tb_2.code as B_code, tb_2.cases as B_cases, tb_2.deaths as B_deaths from ' +
+        '(select sum(cases) as cases, sum(deaths) as deaths, code from activity ' + 
+        'WHERE year_week BETWEEN "' + startDate + '" AND "' + endDate + '" group by code) as tb_1 ' +
+        'JOIN ' + 
+        '(select sum(cases) as cases, sum(deaths) as deaths, code from activity ' +
+        'WHERE year_week BETWEEN "' + startDate + '" AND "' + endDate + '" group by code) as tb_2 ' +
+        'ON (ABS(tb_1.cases - tb_2.cases) / ((tb_1.cases + tb_2.cases) / 2) <= 0.1 ' +
+        'OR ABS(tb_1.deaths - tb_2.deaths) / ((tb_1.deaths + tb_2.deaths) / 2) <= 0.1) AND tb_1.code <> tb_2.code ' +
+        'GROUP BY LEAST(tb_1.code, tb_2.code), GREATEST(tb_1.code, tb_2.code);'
+    );
+}
+
 export {
     getAll,
     getAllByCountry, 
     getDeathsAndCasesByDate,
     getNumberOfTopTenWeek,
+    getCountryPairs,
 };
 

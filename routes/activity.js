@@ -33,6 +33,7 @@ router.get('/getDeathsAndCasesByDate', async (req, res) => {
         res.status(400).send(err.message);
         return;
     }
+    // convert dates to year-week number 
     startDate = getWeekNumber(startDate);
     endDate = getWeekNumber(endDate);
     res.json(await activity.getDeathsAndCasesByDate(res, country, startDate, endDate));
@@ -40,6 +41,33 @@ router.get('/getDeathsAndCasesByDate', async (req, res) => {
 
 router.get('/getNumberOfTopTenWeek', async (req, res) => {
     res.json(await activity.getNumberOfTopTenWeek());
+})
+
+router.get('/getCountryPairs', async (req, res) => {
+    let startDate = req.query.start
+    let endDate = req.query.end
+    // validate user's input
+    try {
+        if (!startDate) {
+            throw new Error(`"startDate" is required`)
+        }
+        if (!endDate) {
+            throw new Error(`"endDate" is required`)
+        }
+        const value = await schema.validateAsync({ 
+            startDate: startDate,
+            endDate: endDate
+        });
+    } catch (err) { 
+        res.status(400).send(err.message);
+        return;
+    }
+    // convert dates to year-week number 
+    startDate = getWeekNumber(startDate);
+    endDate = getWeekNumber(endDate);
+
+    res.json(await activity.getCountryPairs(startDate, endDate));
+
 })
 
 
