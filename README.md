@@ -38,7 +38,7 @@ source country.sql
 source activity.sql
 ```
 
-Create `config/credentials.js' and add your mariadb credentials like this:
+Create `config/credentials.js` and add your mariadb credentials like this:
 
 ```js
 const credentials = {
