@@ -2,9 +2,7 @@
 
 The backend of Covid Stats EU web app. For more information about the app see [here](https://github.com/covid-stats-eu/covid-stats-eu-client)
 
-## What is it?
-
-Covid Stats EU is a simple data analytics system for covid-19 activity monitoring and it's part of a collaborative university assignment in Web technologies course. 
+## Architecture
 
 ![Covid stats ERD](https://user-images.githubusercontent.com/44473195/111869762-8207b480-8989-11eb-8048-ef2803c7e9de.png)
 
@@ -60,3 +58,8 @@ Start node
 ```bash
 npm run dev
 ```
+
+## Authors
+
+- [Alexandros Rigas](https://github.com/Rigas-A)
+- [Dimitris Pramateftakis](https://github.com/dimpram)
