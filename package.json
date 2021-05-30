@@ -1,7 +1,7 @@
 {
-  "name": "covid-stats-eu",
+  "name": "covid-stats-eu-server",
   "version": "1.0.0",
-  "description": "Covid activity tracker for EU countries",
+  "description": "API for Covid Stats EU",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dimpram/covid-stats-eu.git"
+    "url": "git+https://github.com/covid-stats-eu/covid-stats-eu-server"
   },
   "keywords": [
     "covid"
@@ -17,9 +17,9 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dimpram/covid-stats-eu/issues"
+    "url": "https://github.com/covid-stats-eu/covid-stats-eu-server/issues"
   },
-  "homepage": "https://github.com/dimpram/covid-stats-eu#readme",
+  "homepage": "https://github.com/covid-stats-eu/covid-stats-eu-server#readme",
   "dependencies": {
     "@joi/date": "^2.1.0",
     "cors": "^2.8.5",
@@ -28,5 +28,8 @@
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.7"
   },
-  "type": "module"
+  "type": "module",
+  "engines": {
+    "node": "15.x"
+  }
 }
