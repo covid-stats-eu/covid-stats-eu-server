@@ -1,12 +1,10 @@
-# Covid Stats EU
+# Covid Stats EU Server
 
-A web app that displays EU covid data in a pretty and practical way
-
-[INSERT SCREENSHOT OF THE APP]
+The backend of Covid Stats EU web app. For more information about the app see [here](https://github.com/covid-stats-eu/covid-stats-eu-client)
 
 ## What is it?
 
-Covid Stats EU is a simple data analytics system for covid activity monitoring and it's part of a collaborative university assignment in Web technologies course. 
+Covid Stats EU is a simple data analytics system for covid-19 activity monitoring and it's part of a collaborative university assignment in Web technologies course. 
 
 ![Covid stats ERD](https://user-images.githubusercontent.com/44473195/111869762-8207b480-8989-11eb-8048-ef2803c7e9de.png)
 
@@ -20,20 +18,26 @@ Covid Stats EU is a simple data analytics system for covid activity monitoring a
 
 ## Installation for development
 
-*In the future there will be a docker version*
+Make sure you have nodejs v15 and up and mariadb installed on your machine.
 
-Make sure you have nodejs v15 and up and mariadb installed on your machine
-
-Clone the repository 
+Clone the repository.
 
 ```bash
 git clone https://github.com/dimpram/covid-stats-eu.git
 ```
 
-Cd into the cloned repository
+Cd into the cloned repository and select the build folder.
 
 ```bash
-cd covid-status-eu
+cd covid-status-eu/build
+```
+
+Login to your mariadb and source the files in that directory
+
+```sql
+source database.sql
+source country.sql
+source activity.sql
 ```
 
 Create `config/credentials.js' and add your mariadb credentials like this:
