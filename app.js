@@ -8,11 +8,11 @@ const port = process.env.PORT || 3000   // Use system's enviroment port number e
 
 // Middleware for parsing json
 app.use(json())
-app.use(cors())
+app.use(cors({origin: "*",}))
 
 // using routes
-app.use('/activity', cors(), activityRouter)
-app.use('/country', cors(), countryRouter)
+app.use('/activity', cors({origin: "*",}), activityRouter)
+app.use('/country', cors({origin: "*",}), countryRouter)
 
 // Root request
 app.get("/", (req, res) => {
