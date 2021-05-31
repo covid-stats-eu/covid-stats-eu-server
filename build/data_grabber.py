@@ -1,12 +1,17 @@
 import urllib.request, json
 import country_converter as coco
+import os
+
+CASES_DEATHS_LINK = "https://opendata.ecdc.europa.eu/covid19/nationalcasedeath/json/"
+TESTS_LINK = "https://opendata.ecdc.europa.eu/covid19/testing/json/"
 
 #main
-print("(1/4) fetching cases/deaths...")
-with urllib.request.urlopen("https://opendata.ecdc.europa.eu/covid19/nationalcasedeath/json/") as url:
+print("(1/6) fetching cases/deaths...")
+with urllib.request.urlopen(CASES_DEATHS_LINK) as url:
     countries_data = json.loads(url.read().decode())
+print("Done (1/6).")
 
-print("(2/4) create data for country and death cases for activity...")
+print("(2/6) create data for country and death cases for activity...")
 countries = []
 activities = []
 for country_data in countries_data:
@@ -45,12 +50,14 @@ for country_data in countries_data:
         activities[index]["cases"] = country_data["weekly_count"]
     elif country_data["indicator"] == "deaths":
         activities[index]["deaths"] = country_data["weekly_count"]
+print("Done (2/6)")
 
-print("(3/4) fetching tests...")
-with urllib.request.urlopen("https://opendata.ecdc.europa.eu/covid19/testing/json/") as url:
+print("(3/6) fetching tests...")
+with urllib.request.urlopen(TESTS_LINK) as url:
     countries_data = json.loads(url.read().decode())
+print("Done (3/6).")
 
-print("(4/4) create data for tests for activity...")
+print("(4/6) create data for tests for activity...")
 for country_data in countries_data:
     activity_stored = False
     country_data["year_week"] = country_data["year_week"].replace('W', '')
@@ -71,24 +78,29 @@ for country_data in countries_data:
         index = -1 # change index to last item
 
     activities[index]["tests"] = country_data["tests_done"]
+print("Done (4/6).")
 
 # this is optional
 # countries = sorted(countries, key = lambda i: i['name']) 
 # activities = sorted(activities, key = lambda i: (i['code'], i['year_week'] ))
 
+print("(5/6) write country.sql...")
 with open('country.sql', 'w') as f:  
-    print("INSERT INTO `country` (`code`, `name`, `population`) VALUES ", file=f)
+    print("INSERT INTO country (code, name, population) VALUES ", file=f)
     for country in countries:
-        print(
+        f.write(
             "(" +
             "'" + country["code"] + "', " +
             "'" + country["name"] + "', " +
-            "'" + str(country["population"]) + "'), ",
-            file=f
+            "'" + str(country["population"]) + "'), \n"
         )
+    f.seek(f.tell() -3, os.SEEK_SET)
+    f.write(';')
+print("Done (5/6).")
 
-with open('activity.sql', 'w') as f:  
-    print("INSERT INTO `activity` (`cases`, `deaths`, `tests`, `year_week`, `code`) VALUES ", file=f) 
+print("(6/6) write activity.sql...")
+with open('activity.sql', 'w+') as f:  
+    print("INSERT INTO activity (cases, deaths, tests, year_week, code) VALUES ", file=f) 
     for activity in activities:
         if not "cases" in activity:
             activity["cases"] = 0
@@ -97,14 +109,16 @@ with open('activity.sql', 'w') as f:
         if not "tests" in activity:
             activity["tests"] = 0          
 
-        print(
+        f.write(
             "(" +
             "'" + str(activity["cases"]) + "', " +
             "'" + str(activity["deaths"]) + "', " +
             "'" + str(activity["tests"]) + "', " +
             "'" + activity["year_week"] + "', " +
-            "'" + activity["code"] + "'), ",
-            file=f
+            "'" + activity["code"] + "'), \n",
         )
+    f.seek(f.tell() -3, os.SEEK_SET)
+    f.write(';')
+print("Done (6/6).")
 
-print("done")
+print("Done!")
