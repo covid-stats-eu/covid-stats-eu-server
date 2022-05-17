@@ -61,5 +61,5 @@ npm run dev
 
 ## Authors
 
-- [Alexandros Rigas](https://github.com/Rigas-A)
+- [Alexandros Rigas](https://github.com/RigasAlex)
 - [Dimitris Pramateftakis](https://github.com/dimpram)
